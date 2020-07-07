@@ -3,7 +3,7 @@
  * @Author: miiky_yang
  * @Date: 2020-06-22 10:58:56
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-06 11:54:11
+ * @LastEditTime: 2020-07-07 13:14:17
  */
 // 是否为生产环境
 const isProduction = process.env.NODE_ENV !== "development"
@@ -82,6 +82,10 @@ module.exports = {
   },
   css: {
     loaderOptions: {
+      // css: {
+      //   localIdentName: '[name]__[local]-[hash:base64:5]',
+      //   camelCase: true
+      // },
       less: {
         modifyVars: {
           // 通过 less 文件覆盖（文件路径为绝对路径）
@@ -93,7 +97,9 @@ module.exports = {
     }
   },
   devServer: {
-    port: 8088
+    open: false,
+    port: 8088,
+    hot: true
     // 代理地址
   }
 }

@@ -3,10 +3,12 @@
  * @Author: miiky_yang
  * @Date: 2020-06-22 10:52:43
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-06-22 15:35:01
+ * @LastEditTime: 2020-07-07 13:57:01
  */
 
 import Vue from "vue"
+import Store from '@/store'
+import Tools from '@/utils/tools'
 import VueRouter from "vue-router"
 import Routers from './routers'
 Vue.use(VueRouter)
@@ -19,6 +21,26 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
+  //判断是否有meta信息
+  if (to.meta) {
+    document.title = to.meta.title || ''
+    console.log('Tools.isWeixn=>', Tools.isWeixin())
+    if (Tools.isWeixin()) {
+      Store.commit('SET_NEED_HEADER', {
+        needHeader: false
+      })
+    } else {
+      Store.commit('SET_NEED_HEADER', {
+        needHeader: to.meta.needHeader || true
+      })
+    }
+    Store.commit('SET_TITLE_TEXT', {
+      currentTitleText: to.meta.title
+    })
+    Store.commit('SET_NEED_TABBAR', {
+      needTabbar: to.meta.needTabbar
+    })
+  }
   // TODO 根据业务场景做相关路由处理
   next()
 })

@@ -1,3 +1,11 @@
+/**
+* 一般情况下不允许直接修改本文件来修改本项目主题样式，
+  如要修改请先联系：杨春缘(yangchunyuan@geostar.com.cn)沟通后再进行修改
+* 所有更改样式在Customize中定义，然后在对应组件下方写注释//modify，然后注释原样式，新增新样式
+*/
+// Customize Colors
+@wx-title-background: #4277bd;
+
 // Color Palette
 @black: #000;
 @white: #fff;
@@ -447,13 +455,18 @@
 
 // NavBar
 @nav-bar-height: 46px;
-@nav-bar-background-color: @white;
+// @nav-bar-background-color: @white;
 @nav-bar-arrow-size: 16px;
-@nav-bar-icon-color: @blue;
-@nav-bar-text-color: @blue;
+// @nav-bar-icon-color: @blue;
+// @nav-bar-text-color: @blue;
 @nav-bar-title-font-size: @font-size-lg;
-@nav-bar-title-text-color: @text-color;
+// @nav-bar-title-text-color: @text-color;
 @nav-bar-z-index: 1;
+// modify
+@nav-bar-background-color: @wx-title-background;
+@nav-bar-icon-color: @white;
+@nav-bar-text-color: @white;
+@nav-bar-title-text-color: @white;
 
 // NoticeBar
 @notice-bar-height: 40px;
@@ -746,10 +759,12 @@
 // TabbarItem
 @tabbar-item-font-size: @font-size-sm;
 @tabbar-item-text-color: @gray-7;
-@tabbar-item-active-color: @blue;
+// @tabbar-item-active-color: @blue;
 @tabbar-item-line-height: 1;
 @tabbar-item-icon-size: 18px;
 @tabbar-item-margin-bottom: 5px;
+//modify
+@tabbar-item-active-color: @wx-title-background;
 
 // Tab
 @tab-text-color: @gray-7;

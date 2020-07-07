@@ -3,26 +3,68 @@
  * @Author: miiky_yang
  * @Date: 2020-06-22 11:42:21
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-06 10:49:07
+ * @LastEditTime: 2020-07-07 15:47:41
  */
-// 业务路由
-// import usercenter from './module/usercenter'
+import WorkChildren from './module/work'
 
-let other_page = []
+// 业务路由
+import IndexPage from '_v/pages/index-page.vue'
+import NewsPage from '_v/pages/news/news-page.vue'
+import HomePage from '_v/pages/home/home-page.vue'
+import WorkPage from '_v/pages/work/work-page.vue'
+import MinePage from '_v/pages/mine/mine-page.vue'
+
+const servie_page = [{
+  path: '/',
+  name: 'Index',
+  redirect: 'News',
+  component: IndexPage,
+  children: [{
+      path: '/news',
+      name: 'NewsPage',
+      component: NewsPage,
+      meta: {
+        needTabbar: true,
+        needTitle: true,
+        title: '新闻'
+      }
+    }, {
+      path: '/home',
+      name: 'HomePage',
+      component: HomePage,
+      meta: {
+        needTabbar: true,
+        needTitle: true,
+        title: '主页'
+      }
+    }, {
+      path: '/work',
+      name: 'WorkPage',
+      component: WorkPage,
+      meta: {
+        needTabbar: true,
+        needTitle: true,
+        title: '办公'
+      }
+    }, {
+      path: '/mine',
+      name: 'MinePage',
+      component: MinePage,
+      meta: {
+        needTabbar: true,
+        needTitle: true,
+        title: '我的'
+      }
+    },
+    ...WorkChildren
+  ]
+}]
 
 // 独立路由
-const single_page = [{
-    path: "/",
-    name: "Home",
-    component: () => import("_v/pages/Home.vue")
-  },
-  {
-    path: "/about",
-    name: "About",
-    component: () => import("_v/pages/About.vue")
-  }
-]
+const single_page = []
 // 错误异常路由
-let error_page = []
+const error_page = []
 
-export default single_page
+const routers = [...servie_page, ...single_page, ...error_page]
+
+export default servie_page

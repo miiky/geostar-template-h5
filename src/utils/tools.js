@@ -1,6 +1,6 @@
 let tools = {}
 
-tools.isWeixn = function () {
+tools.isWeixin = function () {
   let ua = navigator.userAgent.toLowerCase()
   if (ua.match(/MicroMessenger/i) == 'micromessenger') {
     return true
