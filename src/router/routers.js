@@ -3,7 +3,7 @@
  * @Author: miiky_yang
  * @Date: 2020-06-22 11:42:21
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-07 15:47:41
+ * @LastEditTime: 2020-07-08 13:26:27
  */
 import WorkChildren from './module/work'
 
@@ -13,6 +13,8 @@ import NewsPage from '_v/pages/news/news-page.vue'
 import HomePage from '_v/pages/home/home-page.vue'
 import WorkPage from '_v/pages/work/work-page.vue'
 import MinePage from '_v/pages/mine/mine-page.vue'
+
+import PdfPreview from '_v/single-page/pdf/geo-preview-pdf.vue'
 
 const servie_page = [{
   path: '/',
@@ -61,10 +63,19 @@ const servie_page = [{
 }]
 
 // 独立路由
-const single_page = []
+const single_page = [{
+  path: '/pdf',
+  name: 'PdfPreview',
+  component: PdfPreview,
+  meta: {
+    needTabbar: false,
+    needTitle: true,
+    title: '预览PDF'
+  }
+}]
 // 错误异常路由
 const error_page = []
 
 const routers = [...servie_page, ...single_page, ...error_page]
 
-export default servie_page
+export default routers

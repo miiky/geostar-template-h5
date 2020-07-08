@@ -3,13 +3,11 @@
  * @Author: miiky_yang
  * @Date: 2020-07-07 10:02:00
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-07 18:04:52
+ * @LastEditTime: 2020-07-08 09:48:09
 --> 
 <template>
-  <div style="z-index: 9999;">
-    <van-nav-bar :title="currentTitleText" :left-text="leftText" :right-text="rightText" placeholder fixed left-arrow
-      @click-left="_onClickLeft" @click-right="_onClickRight" />
-  </div>
+  <van-nav-bar :title="currentTitleText" :left-text="leftText" :right-text="rightText" z-index="9999" placeholder fixed
+    left-arrow @click-left="_onClickLeft" @click-right="_onClickRight" />
 </template>
 <script>
 

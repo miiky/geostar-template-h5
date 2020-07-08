@@ -3,7 +3,7 @@
  * @Author: miiky_yang
  * @Date: 2020-07-07 11:27:37
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-07 17:49:51
+ * @LastEditTime: 2020-07-08 17:32:46
 --> 
 <template>
   <div class="affair-page">
@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     _onSearch () {
+      this.list = []
       this._onRefresh()
     },
     _changeTab (tab) {
@@ -95,7 +96,7 @@ export default {
         if (this.list.length >= 40) {
           this.finished = true;
         }
-      }, 1000);
+      }, 500);
     }
   }
 }

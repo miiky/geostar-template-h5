@@ -3,7 +3,7 @@
  * @Author: miiky_yang
  * @Date: 2020-06-22 10:52:43
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-07 14:40:09
+ * @LastEditTime: 2020-07-08 11:52:06
  */
 import Vue from "vue"
 import App from "./App.vue"

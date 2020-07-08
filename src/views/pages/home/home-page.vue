@@ -3,11 +3,11 @@
  * @Author: miiky_yang
  * @Date: 2020-07-07 10:28:23
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-07 10:28:56
+ * @LastEditTime: 2020-07-08 17:30:54
 --> 
 <template>
   <div>
-    i‘m home page
+    <van-empty description="主页正在施工..." />
   </div>
 </template>
 <script>

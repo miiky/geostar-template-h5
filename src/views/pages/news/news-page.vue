@@ -3,11 +3,11 @@
  * @Author: miiky_yang
  * @Date: 2020-07-07 09:53:59
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-07 13:53:36
+ * @LastEditTime: 2020-07-08 17:31:41
 --> 
 <template>
-  <div class="news">
-    {{navigator}}
+  <div class="news-page">
+    <van-empty description="新闻页面正在施工..." />
   </div>
 </template>
 <script>
@@ -18,12 +18,10 @@ export default {
     }
   },
   mounted () {
-    console.log('navigator=>', navigator.userAgent.toLowerCase())
-    this.navigator = navigator.userAgent.toLowerCase()
   }
 }
 </script>
 <style lang="less" scoped>
-.news {
+.news-page {
 }
 </style>
