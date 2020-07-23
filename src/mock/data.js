@@ -1,0 +1,318 @@
+/*
+ * @Description: 文件描述
+ * @Author: miiky_yang
+ * @Date: 2020-07-17 12:29:45
+ * @LastEditors: miiky_yang
+ * @LastEditTime: 2020-07-17 12:30:40
+ */
+let queryNextActivityParticipants = [{
+  "orgId": "1041",
+  "orgName": "分局领导",
+  "empId": "e103d67e2e084e2981d8efcb198802da",
+  "empName": "熊卫国"
+}, {
+  "orgId": "1061",
+  "orgName": "综合科",
+  "empId": "f4a675bc90374a768e70325ad45535d4",
+  "empName": "王传智"
+}, {
+  "orgId": "1121",
+  "orgName": "中心领导",
+  "empId": "c3075c0b827047cd9116c7f6d2cdf398",
+  "empName": "王芙蓉"
+}, {
+  "orgId": "1129",
+  "orgName": "分局领导",
+  "empId": "5a98b18eb3ef4a2babc0b9eb61081076",
+  "empName": "马欣建"
+}, {
+  "orgId": "1129",
+  "orgName": "分局领导",
+  "empId": "f8d695ba9bf940a786180b653f6ee5d7",
+  "empName": "涂志华"
+}, {
+  "orgId": "1174",
+  "orgName": "分局领导",
+  "empId": "088e013df6d241ed9841efd5b1527983",
+  "empName": "祁玉永"
+}, {
+  "orgId": "1221",
+  "orgName": "城市设计与建筑管理处",
+  "empId": "7d56ade67a3c4ef39d095d7b2b1efae5",
+  "empName": "袁杰"
+}, {
+  "orgId": "1222",
+  "orgName": "自然资源调查监测处",
+  "empId": "7554b64055c7491c977adffc507381f5",
+  "empName": "邓雪清"
+}, {
+  "orgId": "1223",
+  "orgName": "自然资源所有者权益处",
+  "empId": "169c6220420f4d88b854271b1d465a21",
+  "empName": "黄宏亮"
+}, {
+  "orgId": "1224",
+  "orgName": "国土空间生态修复处（矿业权管理处）",
+  "empId": "f407d9f3aacd47fcb5d42c989bf2720b",
+  "empName": "戚荣建"
+}, {
+  "orgId": "1225",
+  "orgName": "审计处",
+  "empId": "9100829462684056b3515c0fcd52467e",
+  "empName": "张晓卓"
+}, {
+  "orgId": "1226",
+  "orgName": "正处职专员",
+  "empId": "41bba115dd0a42d08d34ab0315982a86",
+  "empName": "姚俊"
+}, {
+  "orgId": "1226",
+  "orgName": "正处职专员",
+  "empId": "993d174ee27b4789b9d6c8408025f80b",
+  "empName": "徐西军"
+}, {
+  "orgId": "1226",
+  "orgName": "正处职专员",
+  "empId": "c4721931d30542ec8c7bb7082a84628a",
+  "empName": "黄卫东"
+}, {
+  "orgId": "1226",
+  "orgName": "正处职专员",
+  "empId": "f5c6761fca0b4701b866c38b708cc1e8",
+  "empName": "李宁"
+}, {
+  "orgId": "1241",
+  "orgName": "分局领导",
+  "empId": "22f052e478f94dd6a8006e3c86ec0bd2",
+  "empName": "宋刚"
+}, {
+  "orgId": "1241",
+  "orgName": "分局领导",
+  "empId": "4f3b4297a47f4f0eb021206b2e4c7f4b",
+  "empName": "邓芳岩"
+}, {
+  "orgId": "1241",
+  "orgName": "分局领导",
+  "empId": "c5d85b91a5684122a22441df5f422b60",
+  "empName": "刘光治"
+}, {
+  "orgId": "1241",
+  "orgName": "分局领导",
+  "empId": "fd606fad6b1646b1ab67b58b7c5e1a34",
+  "empName": "程鹏"
+}, {
+  "orgId": "1381",
+  "orgName": "中心领导",
+  "empId": "cdd5d6f3644a459fb3e0d35d9492949d",
+  "empName": "蒋海宁"
+}, {
+  "orgId": "1563",
+  "orgName": "业务二科（规划利用科）",
+  "empId": "13151e4358564952a0e8c55cca7e1ad9",
+  "empName": "郭健"
+}, {
+  "orgId": "1581",
+  "orgName": "业务一科（管制保护科）",
+  "empId": "2cd27e5f21724934acc93b66f03cd521",
+  "empName": "冷来军"
+}, {
+  "orgId": "507",
+  "orgName": "办公室",
+  "empId": "26cb396de86f4b5198816fdb7968d144",
+  "empName": "李民"
+}, {
+  "orgId": "508",
+  "orgName": "中心领导",
+  "empId": "3385dccb1e444c8680d8497e9b79577f",
+  "empName": "杨正清"
+}, {
+  "orgId": "508",
+  "orgName": "中心领导",
+  "empId": "5053a1fabfe74ee5880c07b82fc4a552",
+  "empName": "郑晓华"
+}, {
+  "orgId": "509",
+  "orgName": "纪检组",
+  "empId": "8f8abcee58f747f486ce019adbd228a0",
+  "empName": "窦顺山"
+}, {
+  "orgId": "512",
+  "orgName": "行政审批服务处",
+  "empId": "58bcb63550d8469fbb482475e933622a",
+  "empName": "吴海中"
+}, {
+  "orgId": "513",
+  "orgName": "人事处",
+  "empId": "8c10d12e8ab2493787b012f71f99623a",
+  "empName": "万伟庆"
+}, {
+  "orgId": "518",
+  "orgName": "测绘管理处（地理信息处）",
+  "empId": "85e31a25daa84edc86140a7335e4b923",
+  "empName": "贾凉"
+}, {
+  "orgId": "519",
+  "orgName": "详细规划处",
+  "empId": "9637e537f35d4f51b8a4fcdac8753ef2",
+  "empName": "苏玲"
+}, {
+  "orgId": "527",
+  "orgName": "重大项目保障处",
+  "empId": "fcaf119156864f11901bf828b46bd47d",
+  "empName": "方倩"
+}, {
+  "orgId": "528",
+  "orgName": "总体规划处",
+  "empId": "a6fbc8dce2ec488ca29c90e71c06611f",
+  "empName": "罗海明"
+}, {
+  "orgId": "529",
+  "orgName": "交通市政规划处",
+  "empId": "3500f019f79c487da19d57d13f92f3f5",
+  "empName": "陈燕平"
+}, {
+  "orgId": "538",
+  "orgName": "历史文化名城保护处",
+  "empId": "2ba73f2e33594c68b421201cf76c05d4",
+  "empName": "王昭昭"
+}, {
+  "orgId": "539",
+  "orgName": "综合计划处（研究室）",
+  "empId": "1bad70643ba6420390d1915b4334b005",
+  "empName": "聂晶"
+}, {
+  "orgId": "540",
+  "orgName": "南京城乡规划委员会办公室",
+  "empId": "c25173be0dca4c659f01c830ff8adb68",
+  "empName": "吴月静"
+}, {
+  "orgId": "545",
+  "orgName": "分局领导",
+  "empId": "c27630d5d9414ea4830c5eae453df311",
+  "empName": "张弨"
+}, {
+  "orgId": "555",
+  "orgName": "分局领导",
+  "empId": "39f044f53b134e82a31b1e8b5791d5c1",
+  "empName": "陆云峰"
+}, {
+  "orgId": "563",
+  "orgName": "分局领导",
+  "empId": "2afc043018564fcca7bcc5abeb84a2be",
+  "empName": "胡传宏"
+}, {
+  "orgId": "575",
+  "orgName": "分局领导",
+  "empId": "d718e5bc71ca437895bfcf6913245f47",
+  "empName": "姜楠"
+}, {
+  "orgId": "586",
+  "orgName": "分局领导",
+  "empId": "ccb0ff406ebd4fd69da8412d40df51dc",
+  "empName": "孙兆金"
+}, {
+  "orgId": "593",
+  "orgName": "分局领导",
+  "empId": "9e2b062edf584f70ad52c9da859c6ad7",
+  "empName": "闫刚"
+}, {
+  "orgId": "602",
+  "orgName": "分局领导",
+  "empId": "939d7efc962d4c88b01c7540d502542f",
+  "empName": "许海燕"
+}, {
+  "orgId": "613",
+  "orgName": "馆领导",
+  "empId": "e701fca92969437687579231f482acb9",
+  "empName": "周建民"
+}, {
+  "orgId": "624",
+  "orgName": "局领导",
+  "empId": "0f7de22e3e214de7b57b785409bd5988",
+  "empName": "徐洁"
+}, {
+  "orgId": "628",
+  "orgName": "局领导",
+  "empId": "27f28699ebc44129abc2eff46550c487",
+  "empName": "张盈"
+}, {
+  "orgId": "635",
+  "orgName": "中心领导",
+  "empId": "bbfea0e59a834e7586149fee0d0a5540",
+  "empName": "严建国"
+}, {
+  "orgId": "641",
+  "orgName": "副总规划师",
+  "empId": "b849e7ea783447b39d7508468128a08a",
+  "empName": "何强为"
+}, {
+  "orgId": "821",
+  "orgName": "分局领导",
+  "empId": "e6cca4d4e5d945ddac0c5e1ace554dfc",
+  "empName": "陈家祥"
+}, {
+  "orgId": "902",
+  "orgName": "法规处",
+  "empId": "d22f04d7a50940dcb6a369d0b21d145e",
+  "empName": "周振东"
+}, {
+  "orgId": "903",
+  "orgName": "科技发展处",
+  "empId": "62404ac6dc48426b92bd56c4d31d2460",
+  "empName": "谢士杰"
+}, {
+  "orgId": "904",
+  "orgName": "耕地保护与乡村振兴处",
+  "empId": "fb3885b8bd6c43da8941abedbe4f9bd2",
+  "empName": "赵勇"
+}, {
+  "orgId": "905",
+  "orgName": "地质矿产处",
+  "empId": "3a4979d56f864e949cfb8c31bfc20565",
+  "empName": "周荣根"
+}, {
+  "orgId": "906",
+  "orgName": "执法监督局（自然资源督查办公室）",
+  "empId": "8454d9dbc22c495b9cbb11f21c4fa53e",
+  "empName": "纪任明"
+}, {
+  "orgId": "908",
+  "orgName": "财务处",
+  "empId": "715a4df473614280afa6d1e2993aa1b2",
+  "empName": "徐保华"
+}, {
+  "orgId": "909",
+  "orgName": "机关党委（党建办公室）",
+  "empId": "e17d7961325247b88619282b74a8b94b",
+  "empName": "张文涛"
+}, {
+  "orgId": "910",
+  "orgName": "离退休干部处",
+  "empId": "d401578429bd48ceb668cd9da145929d",
+  "empName": "李斌"
+}, {
+  "orgId": "911",
+  "orgName": "自然资源确权登记局",
+  "empId": "5699437e9892414a83d08a73b1e30b64",
+  "empName": "杨闳炜"
+}, {
+  "orgId": "913",
+  "orgName": "不动产登记中心",
+  "empId": "b53eea755cc947f79f33203d91d82d9a",
+  "empName": "丁华"
+}, {
+  "orgId": "915",
+  "orgName": "土地储备中心",
+  "empId": "0530a433b5e644d3857349ed76730cd7",
+  "empName": "范宇"
+}, {
+  "orgId": "921",
+  "orgName": "自然资源开发利用处（城市更新处）",
+  "empId": "87b302a3717d4e5182b92b53d642f120",
+  "empName": "马刚"
+}, {
+  "orgId": "949",
+  "orgName": "主任",
+  "empId": "2d8b4aadab594a6085e4e1c2d9e00dcf",
+  "empName": "胡立兵"
+}]

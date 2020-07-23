@@ -3,7 +3,7 @@
  * @Author: miiky_yang
  * @Date: 2020-06-22 10:58:56
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-07 13:14:17
+ * @LastEditTime: 2020-07-19 22:22:49
  */
 // 是否为生产环境
 const isProduction = process.env.NODE_ENV !== "development"
@@ -15,6 +15,11 @@ const path = require("path") //引入path模块
 let resolve = dir => {
   return path.join(__dirname, dir) //path.join(__dirname)设置绝对路径
 }
+
+// const PROXY_URL = 'http://192.168.32.241'
+// const PROXY_URL = 'http://172.17.0.211'
+const PROXY_URL = 'http://172.17.0.230'
+
 module.exports = {
   publicPath: "./",
   lintOnSave: false,
@@ -98,8 +103,33 @@ module.exports = {
   },
   devServer: {
     open: false,
-    port: 8088,
-    hot: true
-    // 代理地址
+    port: 9099,
+    hot: true,
+    // host: '127.0.0.1',
+    // 代理地址 //192.168.32.241
+    proxy: {
+      '/api/file': {
+        target: PROXY_URL + ':8090',
+        changeOrigin: true,
+        secure: false
+      },
+      '/api/business-service': {
+        target: PROXY_URL + ':8085',
+        changeOrigin: true,
+        secure: false
+      },
+      '/api/workflow-service': {
+        // target: 'http://172.17.0.209:8089',
+        target: PROXY_URL + ':8089',
+        changeOrigin: true,
+        secure: false
+      },
+      '/api': {
+        target: 'http://172.17.0.211:8080',
+        changeOrigin: true,
+        secure: false
+      },
+    }
+
   }
 }

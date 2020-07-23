@@ -3,12 +3,23 @@
  * @Author: miiky_yang
  * @Date: 2020-06-22 13:03:38
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-06 12:00:53
+ * @LastEditTime: 2020-07-22 12:26:07
  */
-import User from './apis/user'
+import App from './apis/app'
+import Business from './apis/business'
+import Workflow from './apis/workflow'
+import File from './apis/file'
+import Coframe from './apis/coframe'
+import Attention from './apis/attention'
 
 class Net {
-  user = new User()
+  app = new App()
+  business = new Business()
+  workflow = new Workflow()
+  file = new File()
+  coframe = new Coframe()
+  attention = new Attention()
 }
 
-export default Net
+const net = new Net()
+export default net

@@ -3,23 +3,24 @@
  * @Author: miiky_yang
  * @Date: 2020-06-22 11:42:21
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-08 13:26:27
+ * @LastEditTime: 2020-07-09 13:17:01
  */
-import WorkChildren from './module/work'
-
 // 业务路由
 import IndexPage from '_v/pages/index-page.vue'
 import NewsPage from '_v/pages/news/news-page.vue'
 import HomePage from '_v/pages/home/home-page.vue'
 import WorkPage from '_v/pages/work/work-page.vue'
 import MinePage from '_v/pages/mine/mine-page.vue'
-
+// 单页路由
+import LoginPage from '_v/single-page/login/login-page.vue'
 import PdfPreview from '_v/single-page/pdf/geo-preview-pdf.vue'
+
+import WorkChildren from './module/work'
 
 const servie_page = [{
   path: '/',
   name: 'Index',
-  redirect: 'News',
+  redirect: 'work',
   component: IndexPage,
   children: [{
       path: '/news',
@@ -64,6 +65,15 @@ const servie_page = [{
 
 // 独立路由
 const single_page = [{
+  path: '/login',
+  name: 'LoginPage',
+  component: LoginPage,
+  meta: {
+    needTabbar: false,
+    needTitle: false,
+    title: '用户登陆'
+  }
+}, {
   path: '/pdf',
   name: 'PdfPreview',
   component: PdfPreview,

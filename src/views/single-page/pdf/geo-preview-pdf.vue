@@ -9,33 +9,37 @@
         <span class="header-btn btn-next" @click.stop="nextPage">下一页</span>
       </span>
       <van-icon class="btn-vertical" name="apps-o" size="20" @click="vertical = !vertical" />
+      <van-icon class="btn-vertical" name="close" size="20" @click="scaleX" />
+      <van-icon class="btn-vertical" name="add-o" size="20" @click="scaleD" />
     </div>
-    <section v-if="vertical">
-      <van-swipe ref="pdfSwiper" :show-indicators="false" @change="_onChange">
-        <van-swipe-item class="pdf-content">
-          <pdf ref="pdf1" :src="pdfUrl" :page="1" :rotate="pageRotate" @progress="loadedRatio = $event"
-            @page-loaded="pageLoaded($event)" @num-pages="pageTotalNum=$event" @error="pdfError($event)">
-          </pdf>
-        </van-swipe-item>
-        <template v-for="item in pageTotalNum">
-          <van-swipe-item v-if="item > 1" :key="item" class="pdf-content">
-            <pdf :ref="'pdf'+item" :src="pdfUrl" :page="item"></pdf>
+    <div v-if="loaded">
+      <section v-if="vertical">
+        <van-swipe ref="pdfSwiper" :show-indicators="false" @change="_onChange">
+          <van-swipe-item class="pdf-content">
+            <pdf ref="pdf1" :src="pdfUrl" :page="1" :rotate="pageRotate" @progress="loadedRatio = $event"
+              @page-loaded="pageLoaded($event)" @num-pages="pageTotalNum=$event" @error="pdfError($event)">
+            </pdf>
           </van-swipe-item>
-        </template>
-      </van-swipe>
-    </section>
-    <section v-else>
-      <div class="pdf-content">
-        <pdf ref="pdf1" :src="pdfUrl" :page="1" :rotate="pageRotate" @progress="loadedRatio = $event"
-          @page-loaded="pageLoaded($event)" @num-pages="pageTotalNum=$event" @error="pdfError($event)">
-        </pdf>
-      </div>
-      <template v-for="item in pageTotalNum">
-        <div v-if="item > 1" :key="item" class="pdf-content">
-          <pdf :ref="'pdf'+item" :src="pdfUrl" :page="item"></pdf>
+          <template v-for="item in pageTotalNum">
+            <van-swipe-item v-if="item > 1" :key="item" class="pdf-content">
+              <pdf :ref="'pdf'+item" :src="pdfUrl" :page="item"></pdf>
+            </van-swipe-item>
+          </template>
+        </van-swipe>
+      </section>
+      <section v-else>
+        <div class="pdf-content">
+          <pdf ref="pdf1" :src="pdfUrl" :page="1" :rotate="pageRotate" @progress="loadedRatio = $event"
+            @page-loaded="pageLoaded($event)" @num-pages="pageTotalNum=$event||1" @error="pdfError($event)">
+          </pdf>
         </div>
-      </template>
-    </section>
+        <template v-for="item in pageTotalNum">
+          <div v-if="item > 1" :key="item" class="pdf-content">
+            <pdf :ref="'pdf'+item" :src="pdfUrl" :page="item"></pdf>
+          </div>
+        </template>
+      </section>
+    </div>
   </div>
 </template>
 <script>
@@ -47,6 +51,7 @@ export default {
   },
   data () {
     return {
+      loaded: false,
       vertical: false,
       pdfUrl: "http://file.dakawengu.com/file/2018-05-29/20180527-tianfeng.pdf",
       pageNum: 1,
@@ -55,7 +60,19 @@ export default {
       // 加载进度
       loadedRatio: 0,
       curPageNum: 0,
+
+      scale: 100
     }
+  },
+  async created () {
+    let id = this.$route.query.id
+    await this.$net.file.preview({ id: id }).then(res => {
+      console.log('preview=>', res)
+      let blob = new Blob([res]);
+      let url = window.URL.createObjectURL(blob)
+      this.pdfUrl = url
+      this.loaded = true
+    })
   },
   methods: {
     _back () {
@@ -84,6 +101,21 @@ export default {
     },
     pdfError (error) {
       // console.error(error)
+    },
+    //放大
+    scaleD () {
+      this.scale += 5;
+      // this.$refs.wrapper.$el.style.transform = "scale(" + this.scale + ")";
+      this.$refs['pdf' + this.pageNum].$el.style.width = parseInt(this.scale) + "%";
+    },
+    //缩小
+    scaleX () {
+      if (this.scale == 100) {
+        return;
+      }
+      this.scale += -5;
+      this.$refs['pdf' + this.pageNum].$el.style.width = parseInt(this.scale) + "%";
+      // this.$refs.wrapper.$el.style.transform = "scale(" + this.scale + ")";
     },
     _onChange (index) {
       console.log(index)

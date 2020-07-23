@@ -1,3 +1,10 @@
+import _ from 'lodash'
+import router from '@/router'
+import {
+  Toast,
+  Notify,
+  Dialog
+} from 'vant'
 let tools = {}
 
 tools.isWeixin = function () {
@@ -168,6 +175,44 @@ tools.copy = (text) => {
  */
 tools.isLightColor = (r, g, b) => {
   return 0.213 * r + 0.715 * g + 0.072 * b > 255 / 2
+}
+
+tools.composeTreeData = (list, props) => {
+  const defaultProps = {
+    id: "id",
+    pid: "pid",
+    children: "children"
+  }
+  props = props || {}
+  props = _.extend(defaultProps, props)
+  let cloneData = _.cloneDeep(list)
+  const listId = []
+  cloneData.forEach(item => {
+    listId.push(item[props.id])
+  })
+  return cloneData.filter(father => {
+    let branchArr = cloneData.filter(child => father[props.id] == child[props.pid])
+    branchArr.length > 0 ? father[props.children] = branchArr : ''
+    return listId.indexOf(father[props.pid]) == -1
+  })
+}
+
+// 全局loading
+tools.loading = (msg) => {
+  Toast.loading({
+    message: msg,
+    forbidClick: true,
+    // loadingType: 'spinner',
+    duration: 0
+  })
+}
+
+tools.clearLoading = () => {
+  Toast.clear()
+}
+
+tools.back = () => {
+  router.go(-1)
 }
 
 export default tools

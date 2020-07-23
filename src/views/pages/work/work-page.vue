@@ -3,7 +3,7 @@
  * @Author: miiky_yang
  * @Date: 2020-07-07 10:30:43
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-07 11:34:06
+ * @LastEditTime: 2020-07-09 09:34:38
 --> 
 <template>
   <div class="work-page">
@@ -78,6 +78,7 @@ export default {
     .card-subtitle {
       font-size: 14px;
       line-height: 1.5;
+      color: @gray-6;
     }
   }
 }

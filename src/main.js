@@ -3,7 +3,7 @@
  * @Author: miiky_yang
  * @Date: 2020-06-22 10:52:43
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-08 11:52:06
+ * @LastEditTime: 2020-07-22 17:09:17
  */
 import Vue from "vue"
 import App from "./App.vue"
@@ -15,13 +15,29 @@ Vue.config.productionTip = false
 
 import '@/assets/style/reset.less'
 // 引入vant ui组件
-import Vant from 'vant';
-import 'vant/lib/index.less';
+import Vant from 'vant'
+import 'vant/lib/index.less'
+import 'vant/lib/icon/local.css'
 Vue.use(Vant);
 
+// 全局注册
+import {
+  Toast,
+  Notify,
+  Dialog
+} from 'vant'
+Toast.allowMultiple()
+Vue.use(Toast)
+Vue.use(Notify)
+Vue.use(Dialog)
+
 // 引入网络请求相关
-import Net from '@/network/index'
-Vue.prototype.$net = new Net()
+import net from '@/network/index'
+import tools from '@/utils/tools'
+import bus from '@/utils/bus'
+Vue.prototype.$net = net
+Vue.prototype.$tools = tools
+Vue.prototype.$bus = bus
 
 new Vue({
   router,

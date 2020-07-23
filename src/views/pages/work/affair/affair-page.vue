@@ -3,11 +3,12 @@
  * @Author: miiky_yang
  * @Date: 2020-07-07 11:27:37
  * @LastEditors: miiky_yang
- * @LastEditTime: 2020-07-08 17:32:46
+ * @LastEditTime: 2020-07-23 10:31:31
 --> 
 <template>
   <div class="affair-page">
-    <van-search v-model="searchKey" show-action shape="round" background="#4277bd" placeholder="请输入搜索关键词">
+    <van-search v-model="searchKey" show-action shape="round" background="#4277bd"
+      placeholder="请输入搜索关键词">
       <template #action>
         <div class="search-btn" @click="_onSearch">搜索</div>
       </template>
@@ -16,7 +17,8 @@
       <div class="affair-page-tab">
         <van-row type="flex" justify="center" align="center">
           <van-col span="8" v-for="item in tabList" :key="item.code">
-            <div class="tab-item" :class="currentTab == item.code?'tab-item-active':''" @click="_changeTab(item.code)">
+            <div class="tab-item" :class="currentTab == item.code?'tab-item-active':''"
+              @click="_changeTab(item.code)">
               <div class="geo-triangle"></div>
               <p>{{item.name}}</p>
             </div>
@@ -26,16 +28,25 @@
     </van-sticky>
     <section class="affair-page-list">
       <van-pull-refresh ref="refreshPanel" v-model="refreshing" @refresh="_onRefresh">
-        <van-list v-model="loading" :finished="finished" :finished-text="finishedText" @load="_onLoad">
-          <van-cell v-for="item in list" :key="item.id" :label="item.name" :value="item.time"
-            :to="{name: 'AffairDetail', query: {id: item.id}}">
-            <template #title>
-              <div>{{item.title}}</div>
+        <van-list v-model="loading" :finished="finished" :finished-text="finishedText"
+          @load="_onLoad">
+          <van-cell v-for="item in list" :key="item.id" @click="_toDetail(item)">
+            <template #title style="width: inherit;">
+              <div class="item-title">
+                <span v-if="item.rollback == 1" class="tag">【回退件】</span>
+                <span class="title">{{item.bt}}</span>
+              </div>
+            </template>
+            <template #label>
+              <div><span>{{(item.blhj||item.gzbq)+'/'+item.ywlxmc}}</span><span
+                  style="float:right;">{{item.xssj}}</span></div>
             </template>
           </van-cell>
         </van-list>
       </van-pull-refresh>
     </section>
+    <van-empty v-show="isEmpty" :image="require('_a/images/empty-image-default.png')"
+      description="暂无信息" />
   </div>
 </template>
 <script>
@@ -44,13 +55,18 @@ export default {
   data () {
     return {
       searchKey: '',
-      tabList: [{ code: 'todo', name: '待办' }, { code: 'handle', name: '经办' }, { code: 'finish', name: '办结' }],
-      currentTab: 'todo',
+      tabList: [],
+      currentTab: '',
       loading: false,
       finished: false,
       refreshing: false,
       finishedText: '没有更多了',
-      list: []
+      nomore: true,
+      list: [],
+      pageSize: 20,
+      pageNum: 0,
+
+      isEmpty: false
     }
   },
   computed: {
@@ -59,7 +75,50 @@ export default {
       return this.isWx ? 0 : 46
     }
   },
+  async created () {
+    this.$tools.loading('加载中...')
+    await this.getTabList()
+    await this.getList()
+    this.$tools.clearLoading()
+  },
   methods: {
+
+    async getTabList () {
+      let params = {}
+      await this.$net.business.getWorkCenterCaseItem(params).then(res => {
+        this.tabList = res.data
+        if (this.tabList && this.tabList.length > 0) {
+          this.currentTab = this.tabList[0].code
+        }
+      })
+    },
+    async getList () {
+      if (this.currentTab == '') {
+        this.isEmpty = true
+        return
+      }
+      let params = {
+        typeCode: this.currentTab,
+        keyword: this.searchKey,
+        pageSize: this.pageSize,
+        pageNum: this.pageNum
+      }
+      await this.$net.business.getCaseList(params).then(res => {
+        // 异步更新数据
+        if (this.refreshing) {
+          this.list = [];
+          this.refreshing = false;
+        }
+        this.pageNum++
+        if (this.pageNum != 0) {
+          this.list = [...this.list, ...res.data.content]
+        } else {
+          this.list = res.data.content
+        }
+        this.loading = false
+        this.finished = res.data.last
+      })
+    },
     _onSearch () {
       this.list = []
       this._onRefresh()
@@ -67,36 +126,38 @@ export default {
     _changeTab (tab) {
       this.currentTab = tab
       this.list = []
+
       this._onRefresh()
     },
     _onRefresh () {
-      this.finished = false
+      this.pageNum = 0
+      // this.finished = false
       this.loading = true
       this._onLoad()
     },
-    _onLoad () {
-      // 异步更新数据
-      setTimeout(() => {
-        if (this.refreshing) {
-          this.list = [];
-          this.refreshing = false;
-        }
-        for (let i = 0; i < 20; i++) {
-          this.list.push({
-            id: this.list.length + 1,
-            title: '2020-07-07培训出差' + (this.list.length + 1) + '天',
-            name: '袁慎明',
-            time: '2020-07-06'
-          });
-        }
-        // 加载状态结束
+    async _onLoad () {
+      if (this.currentTab == '') {
         this.loading = false;
-
-        // 数据全部加载完成
-        if (this.list.length >= 40) {
-          this.finished = true;
-        }
-      }, 500);
+        return
+      }
+      await this.getList()
+    },
+    async _toDetail (item) {
+      let workItemID
+      if (item.processInstID && this.currentTab == 'gzj') {
+        let result = await this.$net.workflow.getCurrentWorkItem({ processInstID: item.processInstID })
+        console.log('getCurrentWorkItem', result)
+        workItemID = result.workItemID
+      } else {
+        workItemID = item.workItemID
+      }
+      let query = {
+        ywid: item.ywid,
+        ywlx: item.ywlx,
+        processInstID: item.processInstID,
+        workItemID: workItemID
+      }
+      this.$router.push({ name: 'AffairDetail', query: query })
     }
   }
 }
@@ -137,9 +198,28 @@ export default {
     }
   }
   &-list {
+    .item-title {
+      overflow: hidden;
+      white-space: nowrap;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      .tag {
+        color: #802618;
+      }
+      .title {
+        color: #333333;
+      }
+    }
   }
   .search-btn {
     color: white;
+  }
+}
+</style>
+<style lang="less">
+.affair-page {
+  .van-cell__title {
+    width: inherit;
   }
 }
 </style>

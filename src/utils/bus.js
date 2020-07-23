@@ -3,16 +3,22 @@
  * @Author: miiky_yang
  * @Date: 2019-05-24 11:13:58
  * @LastEditors: miiky_yang
- * @LastEditTime: 2019-10-09 11:12:43
+ * @LastEditTime: 2020-07-16 16:12:03
  */
 import Vue from 'vue'
 const bus = new Vue({})
+let eventPages = []
 let _on = bus.$on
 let _emit = bus.$emit
-bus.$on = (name, fn) => {
-  if (bus._events[name]) {
+bus.$on = (name, eventPage, fn) => {
+  // 一个控件内只注册一个监听时间
+  if (eventPages.includes(eventPage)) {
     bus.$off(name)
   }
+  // 一个监听时间只允许注册一次
+  // if (bus._events[name]) {
+  //   bus.$off(name)
+  // }
   _on.call(bus, name, fn)
 }
 bus.$emit = (name, params) => {
